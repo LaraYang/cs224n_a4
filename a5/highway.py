@@ -27,7 +27,7 @@ class Highway(nn.Module):
         """
         x_proj = nn.functional.relu(self.proj(x_conv_out))
         x_gate = torch.sigmoid(self.gate(x_conv_out))
-        x_highway = torch.mul(x_gate, x_proj) + torch.mul((torch.ones(x_gate.shape[0], x_gate.shape[1])-x_gate), x_conv_out)
+        x_highway = torch.mul(x_gate, x_proj) + torch.mul((1-x_gate), x_conv_out)
         if testing:
             return (x_proj, x_gate, x_highway)
         return x_highway
