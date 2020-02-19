@@ -42,7 +42,9 @@ class NMT(nn.Module):
 
         self.model_embeddings_source = ModelEmbeddings(word_embed_size, vocab.src)
         self.model_embeddings_target = ModelEmbeddings(word_embed_size, vocab.tgt)
-
+        self.model_embeddings_source = self.model_embeddings_source.to(self.device)
+        self.model_embeddings_target = self.model_embeddings_target.to(self.device)
+        
         self.hidden_size = hidden_size
         self.dropout_rate = dropout_rate
         self.vocab = vocab
