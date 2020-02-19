@@ -11,7 +11,6 @@ Michael Hahn <mhahn2@stanford.edu>
 """
 
 import torch.nn as nn
-import torch
 # Do not change these imports; your module names should be
 #   `CNN` in the file `cnn.py`
 #   `Highway` in the file `highway.py`
@@ -42,11 +41,9 @@ class ModelEmbeddings(nn.Module):
         ## End A4 code
 
         ### YOUR CODE HERE for part 1h
-        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.e_char = 50
         self.word_embed_size = word_embed_size
         self.embeddings = nn.Embedding(len(vocab.char2id), self.e_char)
-        self.embeddings = self.embeddings.to(device)
         self.cnn = CNN(kernel_size=5, e_char=self.e_char, f=word_embed_size)
         self.highway = Highway(word_embed_size)
         self.dropout = nn.Dropout(0.3)
